@@ -4,11 +4,14 @@ import java.util.Scanner;
 
 public class Judge {
 	private int total = 0;
-	Person person;//这个为什么不用new初始化？这个放在每个函数里，才能被TestGame中的主函数调用，否则主函数无法找到Person和Computer类
+	//person、computer和judge是关联关系
+	private Person person = new Person();
+	private Computer computer = new Computer();
+	//这个为什么不用new初始化？这个放在每个函数里，才能被TestGame中的主函数调用，否则主函数无法找到Person和Computer类
 	//如果是静态方法，直接 类名.方法名即可，如果是非静态方法，则需new一个对象出来，然后用对象.方法名调用
 	//这个person和底下的person是一样的吗？不在这里申明可以吗？
-	Computer computer;
 	Scanner input = new Scanner(System.in);
+	//开始游戏
 	public void startGame()
 	{
 		System.out.println("***********************");
@@ -16,28 +19,30 @@ public class Judge {
 		System.out.println("***********************");
 		System.out.println("出拳规则:1.剪刀 2.石头 3.布");
 	}
-	public void askName(Person person,Computer computer)
+	//询问姓名
+	public void askName()
 	{
+		
 		System.out.print("请选择对方角色（1：刘备 2： 孙权 3： 曹操）：");
-		String nameNum = input.next();
-		computer.inputName(nameNum);
-		System.out.print("请输入你的姓名：");
-		String personName = input.next();
-		person.inputName(personName);
+		//String nameNum = input.next();//输入自己的名字是玩家做的，应该放到computer和person里，不需要参数
+		computer.inputName();//computer.inputName(nameNum);
+		System.out.print("请输入你的姓名：");		
+		//String personName = input.next();
+		person.inputName();//person.inputName(personName);
 		System.out.println(person.getPName() + " vs "+ computer.getPName() + " 对战");
 		//询问开始
 		String choise = "y";
 		while(choise!="y" && choise!="n")//如果选择别的就一直重复
 		{
-			System.out.print("要开始吗： （y/n）");	
+			System.out.print("要开始吗： （y/n）");//判断是否继续也是人的事情，最好也放在person里	
 			choise = input.next();
 			if( choise.equals("n") )
 				return;	
 			else;		
 		}
-
 	}
-	public void playGame(Person person,Computer computer)
+	//游戏
+	public void playGame()
 	{
 		String choise = "y";
 		while(choise.equals("y"))
@@ -45,7 +50,7 @@ public class Judge {
 				System.out.print("请出拳：1.剪刀 2.石头 3.布（输入相应数字）：");
 				String personChoise = person.myFist();
 				System.out.println("你出拳：" + personChoise);
-				String computerChoise = computer.myFist();
+				String computerChoise = computer.myFist();//标准的带返回值的调用
 				System.out.println(computer.getPName() + "出拳：" + computerChoise);
 				if((personChoise=="剪刀"&&computerChoise=="石头")||(personChoise=="石头"&&computerChoise=="布")||(personChoise=="布"&&computerChoise=="剪刀"))
 				{
@@ -72,7 +77,8 @@ public class Judge {
 				else;
 		}	
 	}
-	public void finalResult(Person person,Computer computer)
+	//最后结果
+	public void finalResult()
 	{
 		System.out.println("——————————————————————————————————————————————————");
 		System.out.println(computer.getPName() + "vc" +person.getPName());

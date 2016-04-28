@@ -4,9 +4,11 @@ import java.util.Scanner;
 
 public class Person extends Player 
 {
-	Scanner input = new Scanner(System.in);
-	public void inputName(String personName)
+	static Scanner input = new Scanner(System.in);
+	public void inputName()
 	{
+		//static Scanner input = new Scanner(System.in);
+		String personName = input.next();
 		setPName(personName);
 	}
 	public String myFist()

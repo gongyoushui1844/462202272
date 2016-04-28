@@ -1,17 +1,22 @@
 package cn.edu.qdu.game;
 
+import java.util.Scanner;
+
 public class Computer extends Player
 {
-	public void inputName(String nameNum)
+	static Scanner input = new Scanner(System.in);
+	public void inputName()
 	{
-		if(nameNum.equals("1"))
+		int nameNum = input.nextInt();
+		//这可以用数组、if-else、switch
+		if(nameNum == 1)
 			setPName("刘备");//用get和set
-		else if(nameNum.equals("2"))
+		else if(nameNum == 2)
 			setPName("孙权");
-		else if(nameNum.equals("3"))
+		else if(nameNum == 3)
 			setPName("曹操");
 		else
-			setPName(nameNum);
+			setPName("未知");
 	}
 	public String myFist()
 	{
